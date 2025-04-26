@@ -24,11 +24,11 @@ export const getUsers = async (req, res) => {
 
 export const getUserById = async (req, res) => {
     try{
-        const user = await User.findAll({
-            where:{
-                userId: req.params.userId
-            }
-        });
+        const user = await User.findByPk(req.params.userId);
+        if (!user) {
+            return res.status(404).send({ error: 'User not found' });
+        }
+        
         res.status(200).send(user);
     } catch (error) {
         console.error(error);

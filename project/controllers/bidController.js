@@ -1,14 +1,25 @@
 import Bid from '../models/bidModel.js';
+import Tender from '../models/tenderModel.js';
 
 export const createBid = async (req, res) => {
     const { userId, tenderId, amount } = req.body;
     
     try{
+        const tender = await Tender.findByPk(tenderId);
+        if (!tender) {
+            return res.status(404).send({ error: 'Tender not found' });
+        }
+
+        if(tender.status !== 'active') {
+            return res.status(400).send({ error: 'Tender is not active' });
+        }
+
         const bid = await Bid.create({
             userId: userId,
             tenderId: tenderId,
             amount: amount
         })
+
         res.status(201).send(bid);
     } catch (error) {
         console.error(error);

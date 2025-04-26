@@ -36,7 +36,7 @@ export const getActiveTenders = async (req, res) => {
                 status: "active"
             }
         });
-        res.status(200).send(tenders);
+        res.render('active-tenders', { tenders: tenders });
     } catch (error) {
         console.error(error);
         res.status(500).send({ error: 'Failed to fetch active tenders' });
@@ -50,7 +50,7 @@ export const getClosedTenders = async (req, res) => {
                 status: "closed"
             }
         });
-        res.status(200).send(tenders);
+        res.render('closed-tenders', { tenders: tenders });
     } catch (error) {
         console.error(error);
         res.status(500).send({ error: 'Failed to fetch closed tenders' });
@@ -71,6 +71,10 @@ export const getAllTenders = async (req, res) => {
 export const getTenderById = async (req, res) => {
     try{
         const tender = await Tender.findByPk(req.params.tenderId);
+        if (!tender) {
+            return res.status(404).send({ error: 'Tender not found' });
+        }
+        
         res.status(200).send(tender);
     } catch (error) {
         console.error(error);
@@ -80,12 +84,17 @@ export const getTenderById = async (req, res) => {
 
 export const getUserTenderByTitle = async (req, res) => {
     try{
-        const tender = await Tender.findAll({
+        const tender = await Tender.findOne({
             where:{
                 userId: req.params.userId,
                 title: req.params.title
             }
         });
+
+        if (!tender) {
+            return res.status(404).send({ error: 'Tender not found' });
+        }
+
         res.status(200).send(tender);
     } catch (error) {
         console.error(error);
@@ -95,14 +104,34 @@ export const getUserTenderByTitle = async (req, res) => {
 
 export const getAllUserTenders = async (req, res) => {
     try{
-        const tender = await Tender.findAll({
+        const tenders = await Tender.findAll({
             where:{
                 userId: req.params.userId,
             }
         });
-        res.status(200).send(tender);
+        res.render('active-tenders', { tenders: tenders });
     } catch (error) {
         console.error(error);
         res.status(500).send({ error: 'Failed to fetch user tenders' });
+    }
+}
+
+
+export const deleteTenderById = async (req, res) => {
+    try{
+        const tender = await Tender.destroy({
+            where:{
+                id: req.params.tenderId
+            }
+        });
+        
+        if (!tender) {
+            return res.status(404).send({ error: 'Tender not found' });
+        }
+        
+        res.status(200).send(tender);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: 'Failed to delete user tender' });
     }
 }

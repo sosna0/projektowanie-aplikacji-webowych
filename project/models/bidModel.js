@@ -37,4 +37,4 @@ Bid.belongsTo(Tender, {
     foreignKey: 'tenderId'
 });
 
-
+export default Bid;
