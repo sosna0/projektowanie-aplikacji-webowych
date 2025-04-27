@@ -1,7 +1,11 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/db.js';
-import { Tender } from './tenderModel.js';
-import { User } from './userModel.js';
+// import { DataTypes } from 'sequelize';
+// import sequelize from '../config/db.js';
+// import Tender from './tenderModel.js';
+// import User from './userModel.js';
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db.js');
+const Tender = require('./tenderModel.js');
+const User = require('./userModel.js');
 
 
 
@@ -37,4 +41,4 @@ Bid.belongsTo(Tender, {
     foreignKey: 'tenderId'
 });
 
-export default Bid;
+module.exports = Bid;

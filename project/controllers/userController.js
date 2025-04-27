@@ -1,29 +1,29 @@
-import User from '../models/userModel.js';
+const User = require('../models/userModel.js');
 
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
     const { name } = req.body;
     
-    try{
-        const user = await User.create({ name: name})
+    try {
+        const user = await User.create({ name: name });
         res.status(201).send(user);
     } catch (error) {
         console.error(error);
-        res.status(500).send({ error: 'Failed to create bid' });
+        res.status(500).send({ error: 'Failed to create user' });
     }
 };
 
-export const getUsers = async (req, res) => {
-    try{
+const getUsers = async (req, res) => {
+    try {
         const users = await User.findAll();
         res.status(200).send(users);
     } catch (error) {
         console.error(error);
         res.status(500).send({ error: 'Failed to fetch users' });
     }
-}
+};
 
-export const getUserById = async (req, res) => {
-    try{
+const getUserById = async (req, res) => {
+    try {
         const user = await User.findByPk(req.params.userId);
         if (!user) {
             return res.status(404).send({ error: 'User not found' });
@@ -34,13 +34,13 @@ export const getUserById = async (req, res) => {
         console.error(error);
         res.status(500).send({ error: 'Failed to fetch user by id' });
     }
-}
+};
 
-export const getUserByName = async (req, res) => {
-    try{
+const getUserByName = async (req, res) => {
+    try {
         const user = await User.findAll({
-            where:{
-                userId: req.params.username
+            where: {
+                name: req.params.username
             }
         });
         res.status(200).send(user);
@@ -48,4 +48,11 @@ export const getUserByName = async (req, res) => {
         console.error(error);
         res.status(500).send({ error: 'Failed to fetch user by name' });
     }
-}
+};
+
+module.exports = {
+    createUser,
+    getUsers,
+    getUserById,
+    getUserByName
+};

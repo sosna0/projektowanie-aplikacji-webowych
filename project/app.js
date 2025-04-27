@@ -4,8 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const session = require('express-session');
+
 var homeRouter = require('./routes/home');
 var activeTendersRoutes = require('./routes/activeTenders');
+var closedTendersRoutes = require('./routes/closedTenders');
+var createTenderRoutes = require('./routes/createTender');
 // var usersRouter = require('./routes/users');
 
 var app = express();
@@ -22,10 +26,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', homeRouter);
 app.use('/active-tenders', activeTendersRoutes);
-// app.use('/closed-tenders', activeTendersRoutes);
-// app.use('/create-tender', activeTendersRoutes);
+app.use('/closed-tenders', closedTendersRoutes);
+app.use('/create-tender', createTenderRoutes);
 
 // app.use('/users', usersRouter);
+
+app.use(session({
+  secret: 'top-secret', //this should be somehow hidden
+  resave: false,
+  saveUninitialized: false,
+}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>closed-tenders</title>
+    <title>closed-tender-details</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -33,37 +33,36 @@
                             <p><strong>Deadline:</strong> <%= tender.endDate %></p>
                             <a href="/tenders/<%= tender.id %>" class="btn btn-primary">View Details</a>
                         </li>
-                    <% }); %> -->
-                    <div class="table-responsive">
-                        <% if (tenders.length === 0) { %>
-                            <h3 class="text-muted">No closed tenders available</h3>
-                        <% } else { %>
-                            <h3 class="text-muted">Closed Tenders</h3>
-                            <table class="table">
-                                <thead>
+                    <% }); %>
+                </ul> -->
+
+                <!-- id title description startDate endDate budget status -->
+                <div class="table-responsive">
+                    
+                        <h3 class="text-muted">Closed Tenders</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Opened</th>
+                                <th scope="col">Deadline</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% tenders.forEach(tender => { %>
                                     <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Opened</th>
-                                    <th scope="col">Deadline</th>
+                                        <th scope="row"><%= tender.id %></th>
+                                        <td><a href="/tenders/<%= tender.id %>"><%= tender.title %></a></td>
+                                        <td><%= tender.startDate %></td>
+                                        <td><%= tender.endDate %></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <% tenders.forEach(tender => { %>
-                                        <tr>
-                                            <th scope="row"><%= tender.id %></th>
-                                            <td><a href="/closed-tenders/<%= tender.id %>"><%= tender.title %></a></td>
-                                            <td>Tender Closed</td>
-                                            <td>Tender Closed</td>
-                                        </tr>
-                                    <% }); %>
-                                </tbody>
-                            </table>
-                        <% } %>
-                    </div>    
-
-
-
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    
+                </div>    
+               
 
 
             </div>

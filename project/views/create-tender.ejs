@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create-tender</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <% var activePage = 'create-tender'; %> 
+    <%- include('partials/navbar', { activePage: activePage }) %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 p-4">
+
+                <!-- <h1>
+                    <span class="display-3">Welcome to</span>
+                    <span class="display-3" style="font-weight:400;">TenderOnline!</span>
+                </h1>
+
+                <h2 class="display-4 text-muted">Create your own tenders</h2>
+                <h2 class="display-4 text-muted">Participate in active tenders</h2>
+                <h2 class="display-4 text-muted">Submit your bids</h2> -->
+
+                <!-- <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                </div> -->
+
+                <h3>Create Tender</h3>
+                <form action="/save-tender" method="POST">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="startDate" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="startDate" name="startDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="endDate" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="endDate" name="endDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="budget" class="form-label">Budget</label>
+                        <input type="number" class="form-control" id="budget" name="budget" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status" required>
+                            <option value="active">Active</option>
+                            <option value="closed">Closed</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Tender</button>
+                </form>
+                
+
+
+                <!-- 
+                title,
+                description,
+                startDate,
+                endDate,
+                budget,
+                status,
+                userId -->
+
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+

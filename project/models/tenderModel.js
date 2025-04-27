@@ -1,6 +1,6 @@
-import {DataTypes} from 'sequelize';
-import sequelize from '../config/db.js';
-import {User} from './userModel.js';
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db.js');
+const User = require('./userModel.js');
 
 
 const Tender = sequelize.define('Tender', {
@@ -22,7 +22,7 @@ const Tender = sequelize.define('Tender', {
 
     startDate: {
         type: DataTypes.DATE,
-        allowNull: false
+        defaultValue: DataTypes.NOW
     },
 
     endDate: {
@@ -37,7 +37,7 @@ const Tender = sequelize.define('Tender', {
 
     status: {
         type: DataTypes.ENUM('active', 'closed'),
-        allowNull: false
+        defaultValue: 'active'       
     },
 
 });
@@ -46,4 +46,4 @@ Tender.belongsTo(User, {
     foreignKey: 'userId'
 });
 
-export default Tender;
+module.exports = Tender;

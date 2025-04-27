@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-import * as tenderController from '../controllers/tenderController.js';
+const tenderController = require('../controllers/tenderController.js');
 
 
 // GET active tenders

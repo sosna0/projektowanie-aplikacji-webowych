@@ -1,16 +1,16 @@
-import Bid from '../models/bidModel.js';
-import Tender from '../models/tenderModel.js';
+const Bid = require('../models/bidModel.js');
+const Tender = require('../models/tenderModel.js');
 
-export const createBid = async (req, res) => {
+const createBid = async (req, res) => {
     const { userId, tenderId, amount } = req.body;
     
-    try{
+    try {
         const tender = await Tender.findByPk(tenderId);
         if (!tender) {
             return res.status(404).send({ error: 'Tender not found' });
         }
 
-        if(tender.status !== 'active') {
+        if (tender.status !== 'active') {
             return res.status(400).send({ error: 'Tender is not active' });
         }
 
@@ -18,7 +18,7 @@ export const createBid = async (req, res) => {
             userId: userId,
             tenderId: tenderId,
             amount: amount
-        })
+        });
 
         res.status(201).send(bid);
     } catch (error) {
@@ -27,10 +27,10 @@ export const createBid = async (req, res) => {
     }
 };
 
-export const getBids = async (req, res) => {
-    try{
+const getBids = async (req, res) => {
+    try {
         const bids = await Bid.findAll({
-            where:{
+            where: {
                 tenderId: req.params.tenderId
             }
         });
@@ -41,10 +41,10 @@ export const getBids = async (req, res) => {
     }
 }
 
-export const getBid = async (req, res) => {
-    try{
+const getBid = async (req, res) => {
+    try {
         const bids = await Bid.findAll({
-            where:{
+            where: {
                 tenderId: req.params.tenderId,
                 userId: req.params.userId
             }
@@ -55,3 +55,9 @@ export const getBid = async (req, res) => {
         res.status(500).send({ error: 'Failed to fetch bids' });
     }
 }
+
+module.exports = {
+    createBid,
+    getBids,
+    getBid
+};

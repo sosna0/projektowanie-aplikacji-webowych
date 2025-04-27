@@ -7,12 +7,22 @@ const sequelize = new Sequelize('database', 'username', 'password', {
     storage: './database.sqlite', 
 });
 
-
-try {
-    await sequelize.authenticate();
+sequelize
+  .authenticate()
+  .then(() => {
     console.log('Connection has been established successfully.');
-} catch (error) {
+  })
+  .catch(error => {
     console.error('Unable to connect to the database:', error);
-}
+    process.exit(1);
+  });
 
-export default sequelize;
+sequelize.sync({alter: true})
+  .then(() => {
+    console.log('Database is synchronized.');
+  })
+  .catch(error => {
+    console.error('An error occurred during database synchronization: ', error);
+  });
+
+module.exports = sequelize;
