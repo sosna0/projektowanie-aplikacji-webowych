@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const User = require('../models/User');
+const User = require('../models/userModel');
 
 
 const registerUser = async (req, res) => {
@@ -58,7 +58,7 @@ const loginUser = async (req, res) => {
         // login
         req.session.userId = user.id;
         res.redirect('/');
-        res.status(200).send('Login successful');
+        // res.status(200).send('Login successful');
     } catch (error) {
         console.error(error);
         res.status(500).send('Server error');

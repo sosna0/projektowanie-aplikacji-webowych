@@ -6,7 +6,6 @@ const createTender = async (req, res) => {
         description,
         endDate,
         budget,
-        status,
     } = req.body;
     
     try {
@@ -15,10 +14,10 @@ const createTender = async (req, res) => {
             description: description,
             endDate: endDate,
             budget: budget,
-            status: status,
             userId: req.session.userId
         });
-        res.status(201).send(tender);
+        res.redirect('/active-tenders');
+        // res.status(201).send(tender);
     } catch (error) {
         console.error(error);
         res.status(500).send({ error: 'Failed to create tender' });
@@ -70,7 +69,7 @@ const getTenderById = async (req, res) => {
         if (!tender) {
             return res.status(404).send({ error: 'Tender not found' });
         }
-        res.render('tender-details', { tender: tender });
+        res.render('active-tender-details', { tender: tender });
         // res.status(200).send(tender);
     } catch (error) {
         console.error(error);

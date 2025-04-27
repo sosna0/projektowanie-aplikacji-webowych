@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>register-user</title>
+    <title>login-user</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -14,8 +14,11 @@
         <div class="row">
             <div class="col-md-10 p-4">
                 
+                <a href="/" class="btn btn-primary">Home</a>
+                <h3></h3>
+                
                 <h3>Input your username and password</h3>
-                <form action="/login" method="POST">
+                <form action="/login-user/login" method="POST">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username" required>
@@ -28,7 +31,7 @@
                 </form>
                 
                 <h3 class="mt-4">Don't have an account?</h3>
-                <p>Click <a href="/register">here</a> to register.</p>
+                <h3>Click <a href="/register-user">here</a> to register.</h3>
 
             </div>
         </div>

@@ -17,6 +17,7 @@ router.get('/', tenderController.getActiveTenders);
 
 router.get('/:tenderId', tenderController.getTenderById);
 
+// router.get('/:tenderId/details');
 
 // GET user tenders //TODO: do poprawy
 // router.get('/:userId', tenderController.getAllUserTenders);

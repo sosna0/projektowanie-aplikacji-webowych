@@ -29,7 +29,7 @@
                 </div> -->
 
                 <h3>Create Tender</h3>
-                <form action="/save-tender" method="POST">
+                <form action="/create-tender/save" method="POST">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
                         <input type="text" class="form-control" id="title" name="title" required>
@@ -39,24 +39,14 @@
                         <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="startDate" class="form-label">Start Date</label>
-                        <input type="date" class="form-control" id="startDate" name="startDate" required>
-                    </div>
-                    <div class="mb-3">
                         <label for="endDate" class="form-label">End Date</label>
-                        <input type="date" class="form-control" id="endDate" name="endDate" required>
+                        <input type="datetime-local" class="form-control" id="endDate" name="endDate" required>
                     </div>
                     <div class="mb-3">
                         <label for="budget" class="form-label">Budget</label>
                         <input type="number" class="form-control" id="budget" name="budget" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select class="form-select" id="status" name="status" required>
-                            <option value="active">Active</option>
-                            <option value="closed">Closed</option>
-                        </select>
-                    </div>
+                    
                     <button type="submit" class="btn btn-primary">Create Tender</button>
                 </form>
                 

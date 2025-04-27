@@ -1,7 +1,3 @@
-// import { DataTypes } from 'sequelize';
-// import sequelize from '../config/db.js';
-// import Tender from './tenderModel.js';
-// import User from './userModel.js';
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.js');
 const Tender = require('./tenderModel.js');

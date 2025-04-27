@@ -10,7 +10,8 @@ var homeRouter = require('./routes/home');
 var activeTendersRoutes = require('./routes/activeTenders');
 var closedTendersRoutes = require('./routes/closedTenders');
 var createTenderRoutes = require('./routes/createTender');
-// var usersRouter = require('./routes/users');
+var loginRoutes = require('./routes/login');
+var registerRoutes = require('./routes/register');
 
 var app = express();
 
@@ -24,18 +25,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'top-secret', //this should be hidden and more complex
+  resave: false,
+  saveUninitialized: false,
+}));
+
 app.use('/', homeRouter);
 app.use('/active-tenders', activeTendersRoutes);
 app.use('/closed-tenders', closedTendersRoutes);
 app.use('/create-tender', createTenderRoutes);
+app.use('/login-user', loginRoutes);
+app.use('/register-user', registerRoutes);
 
 // app.use('/users', usersRouter);
 
-app.use(session({
-  secret: 'top-secret', //this should be somehow hidden
-  resave: false,
-  saveUninitialized: false,
-}));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

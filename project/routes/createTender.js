@@ -7,7 +7,7 @@ router.get('/', isAuthenticated, function(req, res, next) {
     res.render('create-tender');
 });
 
-router.get('/save-tender', tenderController.createTender);
+router.post('/save', tenderController.createTender);
 
 
 module.exports = router;
