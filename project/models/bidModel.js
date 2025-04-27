@@ -17,15 +17,15 @@ const Bid = sequelize.define('Bid', {
         allowNull: false
     },
 
+    bidderName:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+
     createdAt:{
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     },
-
-    // updatedAt:{
-    //     type: DataTypes.DATE,
-    //     defaultValue: DataTypes.NOW
-    // },
 
 });
 

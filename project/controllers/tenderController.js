@@ -4,6 +4,7 @@ const createTender = async (req, res) => {
     const {
         title,
         description,
+        institutionName,
         endDate,
         budget,
     } = req.body;
@@ -12,6 +13,7 @@ const createTender = async (req, res) => {
         const tender = await Tender.create({
             title: title,
             description: description,
+            institutionName: institutionName,
             endDate: endDate,
             budget: budget,
             userId: req.session.userId
@@ -69,7 +71,10 @@ const getTenderById = async (req, res) => {
         if (!tender) {
             return res.status(404).send({ error: 'Tender not found' });
         }
-        res.render('active-tender-details', { tender: tender });
+        res.render('active-tender-details', {
+            tender: tender,
+            userId: req.session.userId
+        });
         // res.status(200).send(tender);
     } catch (error) {
         console.error(error);

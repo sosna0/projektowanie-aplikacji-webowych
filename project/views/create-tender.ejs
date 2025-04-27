@@ -13,20 +13,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-10 p-4">
-
-                <!-- <h1>
-                    <span class="display-3">Welcome to</span>
-                    <span class="display-3" style="font-weight:400;">TenderOnline!</span>
-                </h1>
-
-                <h2 class="display-4 text-muted">Create your own tenders</h2>
-                <h2 class="display-4 text-muted">Participate in active tenders</h2>
-                <h2 class="display-4 text-muted">Submit your bids</h2> -->
-
-                <!-- <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                </div> -->
+        
+                <a href="/" class="btn btn-primary">Home</a>
+                <h3></h3>
 
                 <h3>Create Tender</h3>
                 <form action="/create-tender/save" method="POST">
@@ -36,11 +25,16 @@
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="2" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="institutionName" class="form-label">Institution Name</label>
+                        <input class="form-control" id="institutionName" name="institutionName" required>
                     </div>
                     <div class="mb-3">
                         <label for="endDate" class="form-label">End Date</label>
-                        <input type="datetime-local" class="form-control" id="endDate" name="endDate" required>
+                        <input type="datetime-local" class="form-control" id="endDate" name="endDate" required 
+                            min="<%= new Date().toISOString().slice(0, 16) %>">
                     </div>
                     <div class="mb-3">
                         <label for="budget" class="form-label">Budget</label>

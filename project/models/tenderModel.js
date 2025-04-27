@@ -20,6 +20,11 @@ const Tender = sequelize.define('Tender', {
         allowNull: false
     },
 
+    institutionName: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+
     startDate: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW

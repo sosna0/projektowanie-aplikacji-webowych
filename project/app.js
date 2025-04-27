@@ -10,6 +10,7 @@ var homeRouter = require('./routes/home');
 var activeTendersRoutes = require('./routes/activeTenders');
 var closedTendersRoutes = require('./routes/closedTenders');
 var createTenderRoutes = require('./routes/createTender');
+var createBidRoutes = require('./routes/createBid');
 var loginRoutes = require('./routes/login');
 var registerRoutes = require('./routes/register');
 
@@ -35,6 +36,7 @@ app.use('/', homeRouter);
 app.use('/active-tenders', activeTendersRoutes);
 app.use('/closed-tenders', closedTendersRoutes);
 app.use('/create-tender', createTenderRoutes);
+app.use('/create-bid', createBidRoutes);
 app.use('/login-user', loginRoutes);
 app.use('/register-user', registerRoutes);
 

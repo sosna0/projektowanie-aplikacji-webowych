@@ -2,7 +2,7 @@ const Bid = require('../models/bidModel.js');
 const Tender = require('../models/tenderModel.js');
 
 const createBid = async (req, res) => {
-    const { userId, tenderId, amount } = req.body;
+    const { tenderId, amount, bidderName } = req.body;
     
     try {
         const tender = await Tender.findByPk(tenderId);
@@ -15,12 +15,15 @@ const createBid = async (req, res) => {
         }
 
         const bid = await Bid.create({
-            userId: userId,
+            userId: req.session.userId,
             tenderId: tenderId,
-            amount: amount
+            amount: amount,
+            bidderName: bidderName
         });
 
-        res.status(201).send(bid);
+        res.redirect('/active-tenders/' + tenderId);
+
+        // res.status(201).send(bid);
     } catch (error) {
         console.error(error);
         res.status(500).send({ error: 'Failed to create bid' });
@@ -32,7 +35,10 @@ const getBids = async (req, res) => {
         const bids = await Bid.findAll({
             where: {
                 tenderId: req.params.tenderId
-            }
+            },
+            order:[
+                ['amount', 'ASC']
+            ]
         });
         res.status(200).send(bids);
     } catch (error) {

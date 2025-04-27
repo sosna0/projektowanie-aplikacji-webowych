@@ -5,7 +5,6 @@ var tenderController = require('../controllers/tenderController.js');
 
 router.get('/', tenderController.getClosedTenders);
 
-// GET user tenders //TODO: do poprawy
-router.get('/:userid', tenderController.getAllUserTenders);
+router.get('/:tenderId', tenderController.getTenderById);
 
 module.exports = router;

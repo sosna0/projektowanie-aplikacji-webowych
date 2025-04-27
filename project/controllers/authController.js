@@ -26,7 +26,9 @@ const registerUser = async (req, res) => {
 
         // automatic login after registration
         req.session.userId = user.id;
-        res.redirect('/');
+        const lastUrl = req.session.lastUrl || '/';
+        delete req.session.lastUrl;
+        res.redirect(lastUrl);
     } catch (error) {
         console.error(error);
         res.status(500).send('Registration error');
@@ -57,7 +59,9 @@ const loginUser = async (req, res) => {
 
         // login
         req.session.userId = user.id;
-        res.redirect('/');
+        const lastUrl = req.session.lastUrl || '/';
+        delete req.session.lastUrl;
+        res.redirect(lastUrl);
         // res.status(200).send('Login successful');
     } catch (error) {
         console.error(error);
