@@ -2,7 +2,7 @@
 
 TenderOnline is a small Express.js project for managing tenders.
 
-## Functionalities:
+# Functionalities:
 
 ## 1.Create your own Tenders
 
@@ -20,15 +20,16 @@ TenderOnline is a small Express.js project for managing tenders.
 
 ![image](https://github.com/user-attachments/assets/25364130-f170-4689-883a-23f0b2fbb94f)
 
+
 ![image](https://github.com/user-attachments/assets/4d7de5b9-4751-4501-91b4-0e2fd3984cb7)
 
 
-## How to run this app
+# How to run this app
 
 ## 1.Clone this repository: 
 
 ```bash
-   git clone <repository-url>
+   git clone https://github.com/sosna0/projektowanie-aplikacji-webowych.git
 ```
 
 ## 2.Make sure you have installed node.js and npm:  
