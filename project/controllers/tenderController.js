@@ -1,4 +1,6 @@
 const Tender = require('../models/tenderModel.js');
+const Bid = require('../models/bidModel.js');
+const { Op } = require('sequelize');
 
 const createTender = async (req, res) => {
     const {
@@ -10,6 +12,7 @@ const createTender = async (req, res) => {
     } = req.body;
     
     try {
+        updateTendersStatus();
         const tender = await Tender.create({
             title: title,
             description: description,
@@ -26,8 +29,23 @@ const createTender = async (req, res) => {
     }
 };
 
+async function updateTendersStatus() {
+    await Tender.update(
+        { status: 'closed' },
+        {
+            where: {
+                status: 'active',
+                endDate: {
+                    [Op.lt]: new Date()
+                }
+            }
+        }
+    );
+}
+
 const getActiveTenders = async (req, res) => {
     try {
+        updateTendersStatus();
         const tenders = await Tender.findAll({
             where: {
                 status: "active"
@@ -43,6 +61,7 @@ const getActiveTenders = async (req, res) => {
 
 const getClosedTenders = async (req, res) => {
     try {
+        updateTendersStatus();
         const tenders = await Tender.findAll({
             where: {
                 status: "closed"
@@ -57,6 +76,7 @@ const getClosedTenders = async (req, res) => {
 
 const getAllTenders = async (req, res) => {
     try {
+        updateTendersStatus();
         const tenders = await Tender.findAll();
         res.status(200).send(tenders);
     } catch (error) {
@@ -65,9 +85,16 @@ const getAllTenders = async (req, res) => {
     }
 };
 
-const getTenderById = async (req, res) => {
+const getActiveTenderById = async (req, res) => {
     try {
-        const tender = await Tender.findByPk(req.params.tenderId);
+        updateTendersStatus();
+        const tender = await Tender.findOne({
+            where: {
+                id: req.params.tenderId,
+                status: 'active'
+            }
+        });
+
         if (!tender) {
             return res.status(404).send({ error: 'Tender not found' });
         }
@@ -82,8 +109,49 @@ const getTenderById = async (req, res) => {
     }
 };
 
+
+const getClosedTenderWithBidsById = async (req, res) => {
+    try {
+        updateTendersStatus();
+        const tender = await Tender.findOne({
+            where: {
+                id: req.params.tenderId,
+                status: 'closed'
+            }
+        });
+
+        if (!tender) {
+            return res.status(404).send({ error: 'Tender not found' });
+        }
+
+        const bids = await Bid.findAll({
+            where: {
+                tenderId: req.params.tenderId,
+                amount: {
+                    [Op.lte]: tender.budget
+                }
+            },
+            order:[
+                ['amount', 'ASC']
+            ]
+        });        
+
+        res.render('closed-tender-details', {
+            tender: tender,
+            bids: bids,
+            userId: req.session.userId
+        });
+        // res.status(200).send(tender);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: 'Failed to fetch user tender' });
+    }
+};
+
+
 const getUserTenderByTitle = async (req, res) => {
     try {
+        updateTendersStatus();
         const tender = await Tender.findOne({
             where: {
                 userId: req.session.userId,
@@ -104,6 +172,7 @@ const getUserTenderByTitle = async (req, res) => {
 
 const getAllUserTenders = async (req, res) => {
     try {
+        updateTendersStatus();
         const tenders = await Tender.findAll({
             where: {
                 userId: req.session.userId,
@@ -141,7 +210,8 @@ module.exports = {
     getActiveTenders,
     getClosedTenders,
     getAllTenders,
-    getTenderById,
+    getActiveTenderById,
+    getClosedTenderWithBidsById,
     getUserTenderByTitle,
     getAllUserTenders,
     deleteUserTenderById

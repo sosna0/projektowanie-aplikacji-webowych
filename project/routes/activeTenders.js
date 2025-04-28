@@ -4,10 +4,7 @@ var tenderController = require('../controllers/tenderController.js');
 const isAuthenticated = require('../middleware/auth.js');
 
 
-// GET active tenders
 router.get('/', tenderController.getActiveTenders);
-
-router.get('/:tenderId', isAuthenticated, tenderController.getTenderById);
-
+router.get('/:tenderId', isAuthenticated, tenderController.getActiveTenderById);
 
 module.exports = router;

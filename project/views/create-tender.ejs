@@ -32,7 +32,7 @@
                         <input class="form-control" id="institutionName" name="institutionName" required>
                     </div>
                     <div class="mb-3">
-                        <label for="endDate" class="form-label">End Date</label>
+                        <label for="endDate" class="form-label">Deadline</label>
                         <input type="datetime-local" class="form-control" id="endDate" name="endDate" required 
                             min="<%= new Date().toISOString().slice(0, 16) %>">
                     </div>
@@ -44,18 +44,6 @@
                     <button type="submit" class="btn btn-primary">Create Tender</button>
                 </form>
                 
-
-
-                <!-- 
-                title,
-                description,
-                startDate,
-                endDate,
-                budget,
-                status,
-                userId -->
-
-
             </div>
         </div>
     </div>

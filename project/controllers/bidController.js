@@ -2,12 +2,13 @@ const Bid = require('../models/bidModel.js');
 const Tender = require('../models/tenderModel.js');
 
 const createBid = async (req, res) => {
-    const { tenderId, amount, bidderName } = req.body;
+    const { amount, bidderName } = req.body;
+    const tenderId = req.params.tenderId;
     
     try {
-        const tender = await Tender.findByPk(tenderId);
+        const tender = await Tender.findByPk(Number(tenderId));
         if (!tender) {
-            return res.status(404).send({ error: 'Tender not found' });
+            return res.status(404).send({ error: 'Tender not found HEREEE' });
         }
 
         if (tender.status !== 'active') {
