@@ -1,6 +1,6 @@
 # TenderOnline
 
-TenderOnline is a small Express.js project for managing tenders.
+## TenderOnline is a small Express.js project for managing tenders.
 
 # Functionalities:
 
@@ -39,7 +39,7 @@ TenderOnline is a small Express.js project for managing tenders.
    npm -v
 ```
 
-## 3.Install required dependencies by:  npm install
+## 3.Install required dependencies by:
 
 ```bash
    npm install
